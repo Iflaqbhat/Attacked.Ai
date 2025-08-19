@@ -119,23 +119,22 @@ export default function IncidentsPage() {
                   </span>
                 </div>
                 
-                {/* Source/Target info if available */}
-                {(i.source || i.target) && (
-                  <div className="mt-4 pt-4 border-t border-white/10">
-                    <div className="flex items-center gap-4 text-xs text-neutral-light/50">
-                      {i.source && (
-                        <span className="flex items-center gap-1">
-                          🎯 Source: {i.source}
-                        </span>
-                      )}
-                      {i.target && (
-                        <span className="flex items-center gap-1">
-                          🎯 Target: {i.target}
-                        </span>
-                      )}
-                    </div>
+                {/* View Source link for all incidents */}
+                <div className="mt-4 pt-4 border-t border-white/10">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-neutral-light/50 flex items-center gap-1">
+                      📰 Source: {i.source || 'Official Report'}
+                    </span>
+                    <span className="text-xs text-blue-400 hover:text-blue-300 transition-colors cursor-pointer">
+                      View Source →
+                    </span>
                   </div>
-                )}
+                </div>
+                
+                {/* Target info - always show, empty if not available */}
+                <div className="mt-2 text-xs text-neutral-light/50 flex items-center gap-1">
+                  🎯 Target: {i.target || 'Not specified'}
+                </div>
               </div>
               
               {/* Hover indicator */}
