@@ -44,26 +44,26 @@ export default function HomePage() {
                 <div className="w-3 h-3 bg-red-400 rounded-full animate-ping"></div>
                 🚨 LIVE THREAT MONITORING ACTIVE
               </div>
-              <h1 className="text-7xl font-bold text-white mb-8">
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-8">
                 <span className="bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
                   Global Threat Intelligence
                 </span>
               </h1>
-              <p className="text-2xl text-neutral-light/70 max-w-4xl mx-auto leading-relaxed mb-10">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-neutral-light/70 max-w-4xl mx-auto leading-relaxed mb-10">
                 Real-time monitoring of cyberattacks, natural disasters, and global incidents as they unfold worldwide.
               </p>
               
               {/* Enhanced stats with better styling */}
-              <div className="flex items-center justify-center gap-12 text-base">
-                <div className="flex items-center gap-3 text-neutral-light/70 bg-white/5 px-6 py-3 rounded-full border border-white/10">
+              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-12 text-sm md:text-base">
+                <div className="w-full sm:w-auto flex items-center gap-2 sm:gap-3 text-neutral-light/70 bg-white/5 px-3 py-2 sm:px-4 sm:py-2.5 md:px-5 md:py-3 rounded-full border border-white/10 backdrop-blur-sm">
                   <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
                   <span className="font-semibold">{incidents.length} Active Incidents</span>
                 </div>
-                <div className="flex items-center gap-3 text-neutral-light/70 bg-white/5 px-6 py-3 rounded-full border border-white/10">
+                <div className="w-full sm:w-auto flex items-center gap-2 sm:gap-3 text-neutral-light/70 bg-white/5 px-3 py-2 sm:px-4 sm:py-2.5 md:px-5 md:py-3 rounded-full border border-white/10 backdrop-blur-sm">
                   <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
                   <span className="font-semibold">Real-time Updates</span>
                 </div>
-                <div className="flex items-center gap-3 text-neutral-light/70 bg-white/5 px-6 py-3 rounded-full border border-white/10">
+                <div className="w-full sm:w-auto flex items-center gap-2 sm:gap-3 text-neutral-light/70 bg-white/5 px-3 py-2 sm:px-4 sm:py-2.5 md:px-5 md:py-3 rounded-full border border-white/10 backdrop-blur-sm">
                   <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse"></div>
                   <span className="font-semibold">Global Coverage</span>
                 </div>
@@ -75,7 +75,7 @@ export default function HomePage() {
               <div className="lg:col-span-2 rounded-3xl overflow-hidden ring-2 ring-white/20 bg-black/40 backdrop-blur-xl shadow-2xl border border-white/10">
                 <Globe incidents={incidents} />
               </div>
-              <aside className="rounded-3xl ring-2 ring-white/20 bg-black/40 backdrop-blur-xl max-h-[600px] overflow-y-auto shadow-2xl border border-white/10">
+              <aside className="rounded-3xl ring-2 ring-white/20 bg-black/40 backdrop-blur-xl max-h-full md:max-h-[600px] overflow-y-auto shadow-2xl border border-white/10">
                 <LiveFeed incidents={incidents} />
               </aside>
             </div>

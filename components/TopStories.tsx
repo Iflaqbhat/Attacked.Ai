@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { Incident } from '@/lib/mockData'
 
 type Props = { incidents: Incident[] }
@@ -11,6 +11,15 @@ export function TopStories({ incidents }: Props) {
   const [isAnimating, setIsAnimating] = useState(false)
 
   const features = sorted.slice(startIdx, startIdx + 4)
+
+  // Track viewport size to apply desktop-only centering logic
+  const [isLargeScreen, setIsLargeScreen] = useState(false)
+  useEffect(() => {
+    const update = () => setIsLargeScreen(window.innerWidth >= 1024) // lg breakpoint
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
 
   const shift = (direction: number) => {
     if (isAnimating) return
@@ -42,24 +51,24 @@ export function TopStories({ incidents }: Props) {
         <button
           onClick={() => shift(-1)}
           disabled={isAnimating}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-lg bg-black/60 hover:bg-black/80 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xl grid place-items-center transition-all duration-200 border border-white/20"
+          className="hidden lg:grid absolute left-4 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-lg bg-black/60 hover:bg-black/80 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xl place-items-center transition-all duration-200 border border-white/20"
         >
           ‹
         </button>
 
         {/* Cards Grid - Centered */}
-        <div className="px-16 flex justify-center">
+        <div className="px-4 sm:px-8 lg:px-16 flex justify-center">
           <div
-            className={`grid gap-6 transition-all duration-300 ${
+            className={`grid gap-4 sm:gap-6 transition-all duration-300 ${
               isAnimating ? 'opacity-50' : 'opacity-100'
-            }`}
-            style={{
+            } ${isLargeScreen ? 'grid-cols-4' : 'grid-cols-1 sm:grid-cols-2'}`}
+            style={isLargeScreen ? {
               gridTemplateColumns: features.length === 3 ? 'repeat(3, 320px)' : 
                                  features.length === 2 ? 'repeat(2, 320px)' : 
                                  features.length === 1 ? 'repeat(1, 320px)' : 
                                  'repeat(4, 1fr)',
               maxWidth: features.length < 4 ? `${features.length * 320 + (features.length - 1) * 24}px` : '100%'
-            }}
+            } : undefined}
           >
             {features.map((s, index) => (
               <Link 
@@ -123,7 +132,7 @@ export function TopStories({ incidents }: Props) {
         <button
           onClick={() => shift(1)}
           disabled={isAnimating}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-lg bg-black/60 hover:bg-black/80 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xl grid place-items-center transition-all duration-200 border border-white/20"
+          className="hidden lg:grid absolute right-4 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-lg bg-black/60 hover:bg-black/80 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xl place-items-center transition-all duration-200 border border-white/20"
         >
           ›
         </button>
